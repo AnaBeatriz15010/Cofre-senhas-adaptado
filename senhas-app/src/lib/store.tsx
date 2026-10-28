@@ -18,6 +18,12 @@ const K = {
   profile: 'profile',
   accounts: 'accounts',
 };
+const DEFAULT = '1234';
+const K = {
+  pass: 'app_password',
+  profile: 'profile',
+  accounts: 'accounts',
+};
 
 async function readJSON<T>(key: string, fallback: T): Promise<T> {
   try {

@@ -1,16 +1,16 @@
 import { StyleSheet } from 'react-native';
 
 export const colors = {
-  background: '#f5f6fa',
-  primary: '#2563eb',
-  primaryDark: '#1e3a8a',
+  background: '#e394f3',
+  primary: '#fafafa',
+  primaryDark: '#961e86',
   white: '#ffffff',
   text: '#111111',
   muted: '#666666',
   subtle: '#999999',
   border: '#dddddd',
-  avatar: '#e5e7eb',
-  danger: '#dc2626',
+  avatar: '#bd8fe7',
+  danger: '#f7c10f',
   welcomeText: '#cbd5e1',
 };
 

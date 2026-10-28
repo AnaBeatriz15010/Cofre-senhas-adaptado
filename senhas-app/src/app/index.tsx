@@ -1,51 +1,91 @@
-import { Ionicons } from '@expo/vector-icons';
-import { useRouter } from 'expo-router';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { colors, commonStyles } from '../lib/styles';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { router } from 'expo-router';
 
-export default function Welcome() {
-  const router = useRouter();
+export default function LoginScreen() {
+  // Mantém o estado do usuário/senha e adiciona o da nova caixa
+  const [usuario, setUsuario] = useState('');
+  const [senha, setSenha] = useState('');
+  const [palavraChave, setPalavraChave] = useState('');
+
+  const handleLogin = () => {
+    // Defina as validações necessárias para os três campos
+    if (usuario && senha && palavraChave) {
+      Alert.alert('Sucesso', 'Acesso permitido!');
+      router.replace('/home'); 
+    } else {
+      Alert.alert('Erro', 'Preencha todos os campos, incluindo a palavra-passe adicional!');
+    }
+  };
 
   return (
-    <View style={styles.screen}>
-      <Ionicons name="shield-checkmark" size={90} color={colors.white} />
-      <Text style={styles.title}>Meu Cofre</Text>
-      <Text style={styles.subtitle}>
-        Guarde e consulte suas senhas em um só lugar.
-      </Text>
-      <Pressable style={styles.button} onPress={() => router.push('/login')}>
+    <View style={styles.container}>
+      <Text style={styles.title}>Atualização de Acesso</Text>
+      
+      {/* Caixa do Usuário */}
+      <TextInput
+        style={styles.input}
+        placeholder="Usuário"
+        value={usuario}
+        onChangeText={setUsuario}
+      />
+
+      {/* Caixa da Senha */}
+      <TextInput
+        style={styles.input}
+        placeholder="Senha"
+        secureTextEntry
+        value={senha}
+        onChangeText={setSenha}
+      />
+
+      {/* Nova Caixa solicitada para a palavra-passe adicional */}
+      <TextInput
+        style={styles.input}
+        placeholder="Palavra-passe adicional"
+        secureTextEntry
+        value={palavraChave}
+        onChangeText={setPalavraChave}
+      />
+
+      <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Entrar</Text>
-      </Pressable>
+      </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  screen: {
+  container: {
     flex: 1,
-    padding: 24,
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: colors.primaryDark,
+    padding: 20,
+    backgroundColor: '#fff',
   },
   title: {
-    ...commonStyles.title,
-    color: colors.white,
-    marginTop: 16,
-  },
-  subtitle: {
-    color: colors.welcomeText,
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
     textAlign: 'center',
-    marginTop: 8,
+  },
+  input: {
+    height: 50,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    paddingHorizontal: 15,
+    marginBottom: 15,
   },
   button: {
-    ...commonStyles.button,
-    backgroundColor: colors.white,
-    width: '100%',
-    marginTop: 40,
+    height: 50,
+    backgroundColor: '#007AFF',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 8,
   },
   buttonText: {
-    ...commonStyles.buttonText,
-    color: colors.primaryDark,
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
